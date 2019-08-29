@@ -32,7 +32,7 @@ deliveryClient
 
       let description = document.createElement("div");
       description.setAttribute("class", "article-description");
-      description.innerHTML = item.body_copy.value.substring(0, 300);
+      description.innerHTML = item.summary.value;
 
       articleList.appendChild(card);
 
