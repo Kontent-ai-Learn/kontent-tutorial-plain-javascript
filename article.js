@@ -31,7 +31,7 @@ deliveryClient
       // Link to article hash
       if (link.type == "article") {
         return { 
-          html: `article.html#${link.urlSlug}` 
+          url: `article.html#${link.urlSlug}` 
         };
       }
       // For coffee links, redirect to React site
@@ -63,4 +63,7 @@ deliveryClient
     articleContainer.appendChild(title);
     articleContainer.appendChild(body);
   })
-  .catch(app.innerHTML = notFound);
+  .catch(err => {
+    app.innerHTML = notFound
+    console.log('error: ' + err)
+  });
