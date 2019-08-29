@@ -5,6 +5,9 @@ const renderHash = () => {
 
 window.addEventListener("hashchange", renderHash, false);
 
+// 404 message
+const notFound = "<p>That article could not be found.</p>"
+
 // Create article container
 const app = document.getElementById("app");
 const articleContainer = document.createElement("div");
@@ -59,4 +62,5 @@ deliveryClient
     articleContainer.appendChild(headerImage);
     articleContainer.appendChild(title);
     articleContainer.appendChild(body);
-  });
+  })
+  .catch(app.innerHTML = notFound);
