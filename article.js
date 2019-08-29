@@ -34,13 +34,21 @@ deliveryClient
           url: `article.html#${link.urlSlug}` 
         };
       }
-      // For coffee links, redirect to React site
-      if (link.type == "coffee") {
+       // For coffee links, redirect to React site
+       if (link.type == "coffee") {
         return {
           url: `article.html#${link.urlSlug}`
         };
       }
       return { url: "unsupported-link" };
+    },
+    richTextResolver: (item,context) => {
+      // Resolved hosted videos
+      if (item.system.type == 'hosted_video') {
+        let videoID = item.video_id.value;
+        // Return based on hosting provider 
+        return ((item.video_host.value[0].codename == 'youtube') ? `<iframe src="https://www.youtube.com/embed/${videoID}" width="560" height="315" frameborder="0"></iframe>` : `<iframe src="https://player.vimeo.com/video/${videoID}" width="560" height="315" allowfullscreen frameborder="0"></iframe>`)
+      }
     }
   })
   .toPromise()
