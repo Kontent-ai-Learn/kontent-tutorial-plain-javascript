@@ -1,3 +1,12 @@
-# plain-javascript-tutorial
+# Kentico Cloud plain JavaScript tutorial
+
 [![Live Demo](https://img.shields.io/badge/live-demo-brightgreen.svg)](https://colliercz.github.io/plain-javascript-tutorial/)
-A simple website written in plain JavaScript with data from Kentico Cloud.
+[![Stack Overflow](https://img.shields.io/badge/Stack%20Overflow-ASK%20NOW-FE7A16.svg?logo=stackoverflow&logoColor=white)](https://stackoverflow.com/tags/kentico-cloud)
+
+This is simple website written in plain JavaScript that retrieves and displays content from Kentico Cloud. It serves as a source code reference for the [Building your first plain JavaScript app with Kentico Cloud](https://docs.kenticocloud.com/tutorials/develop-apps/get-started/building-your-first-application?tech=javascript) tutorial.
+
+The project uses the the [Kentico Cloud JavaScript Delivery SDK](https://github.com/Kentico/kentico-cloud-js/tree/master/packages/delivery).
+
+To run, download the files and open `index.html.
+
+To pull content from your own project, change the `projectId` in both `article.js` and `articleList.js` to the ID of your project.
