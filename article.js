@@ -34,10 +34,10 @@ deliveryClient
           url: `article.html#${link.urlSlug}` 
         };
       }
-       // For coffee links, redirect to React site
+       // Handle coffee links
        if (link.type == "coffee") {
         return {
-          url: `article.html#${link.urlSlug}`
+          url: `coffee.html#${link.urlSlug}`
         };
       }
       return { url: "unsupported-link" };
