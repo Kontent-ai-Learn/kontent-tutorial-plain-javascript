@@ -1,0 +1,54 @@
+body {
+  font-family: "Segoe UI", "Helvetica Neue", sans-serif;
+  padding: 0 20%;
+}
+
+#app-header {
+  background-color: #231f20;
+  height: 6em;
+  padding: 20px;
+  color: #ffffff;
+}
+
+#app-header a {    
+  text-decoration: none;
+  color: inherit;
+}
+
+#article-list {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.card {
+  margin: 1rem;
+  padding: 1rem;
+  border: 1px solid #231f20;
+  border-radius: 2.5%;
+}
+
+.card:hover {
+  transform: translate3d(0, -0.5rem, 0);
+  box-shadow: grey 0 0 1rem;
+}
+
+@media screen and (min-width: 700px) {
+  .card {
+    flex: 1 1 calc(50% - 8rem);
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  .card {
+    flex: 1 1 calc(33% - 4rem);
+  }
+}
+
+.card a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.article-teaser {
+  width: 100%;
+}
