@@ -7,6 +7,6 @@ This is simple website written in plain JavaScript that retrieves and displays c
 
 The project uses the the [Kentico Cloud JavaScript Delivery SDK](https://github.com/Kentico/kentico-cloud-js/tree/master/packages/delivery).
 
-To run, download the files and open `index.html.
+To run, download the files and open `index.html`.
 
 To pull content from your own project, change the `projectId` in both `article.js` and `articleList.js` to the ID of your project.
