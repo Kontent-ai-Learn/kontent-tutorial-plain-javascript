@@ -14,11 +14,11 @@ const articleContainer = document.createElement("div");
 articleContainer.setAttribute("class", "article");
 app.appendChild(articleContainer);
 
-var articleSlug = location.hash.slice(1);
+let articleSlug = location.hash.slice(1);
 
-var Kc = window["kenticoCloudDelivery"];
+const Kc = window["kenticoCloudDelivery"];
 
-var deliveryClient = new Kc.DeliveryClient({
+const deliveryClient = new Kc.DeliveryClient({
   projectId: "975bf280-fd91-488c-994c-2f04416e5ee3"
 });
 
@@ -53,7 +53,7 @@ deliveryClient
   })
   .toPromise()
   .then(response => {
-    var article = response.items[0];
+    let article = response.items[0];
 
     let headerImage = document.createElement("img");
     headerImage.setAttribute("class", "article-header");

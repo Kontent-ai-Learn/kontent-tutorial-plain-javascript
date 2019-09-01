@@ -4,9 +4,9 @@ const articleList = document.createElement("div");
 articleList.setAttribute("id", "article-list");
 app.appendChild(articleList);
 
-var Kc = window["kenticoCloudDelivery"];
+const Kc = window["kenticoCloudDelivery"];
 
-var deliveryClient = new Kc.DeliveryClient({
+const deliveryClient = new Kc.DeliveryClient({
   projectId: "975bf280-fd91-488c-994c-2f04416e5ee3"
 });
 
