@@ -29,13 +29,13 @@ deliveryClient
   .queryConfig({
     urlSlugResolver: (link, context) => {
       // Link to article hash
-      if (link.type == "article") {
+      if (link.type === "article") {
         return { 
           url: `article.html#${link.urlSlug}` 
         };
       }
        // Handle coffee links
-       if (link.type == "coffee") {
+       if (link.type === "coffee") {
         return {
           url: `coffee.html#${link.urlSlug}`
         };
@@ -44,10 +44,10 @@ deliveryClient
     },
     richTextResolver: (item,context) => {
       // Resolved hosted videos
-      if (item.system.type == 'hosted_video') {
+      if (item.system.type === 'hosted_video') {
         let videoID = item.video_id.value;
         // Return based on hosting provider 
-        return ((item.video_host.value[0].codename == 'youtube') ? `<iframe src="https://www.youtube.com/embed/${videoID}" width="560" height="315" frameborder="0"></iframe>` : `<iframe src="https://player.vimeo.com/video/${videoID}" width="560" height="315" allowfullscreen frameborder="0"></iframe>`)
+        return ((item.video_host.value[0].codename === 'youtube') ? `<iframe src="https://www.youtube.com/embed/${videoID}" width="560" height="315" frameborder="0"></iframe>` : `<iframe src="https://player.vimeo.com/video/${videoID}" width="560" height="315" allowfullscreen frameborder="0"></iframe>`)
       }
     }
   })
