@@ -5,8 +5,9 @@ const renderHash = () => {
 
 window.addEventListener("hashchange", renderHash, false);
 
-// 404 message
+// Error messages
 const notFound = "<p>That article could not be found.</p>";
+const unknownError = "<p>An error occured 😞. Check the console for more details.</p>";
 
 // Create article container
 const app = document.getElementById("app");
@@ -64,27 +65,32 @@ deliveryClient
   })
   .toPromise()
   .then(response => {
-    if (response.items && response.items.length) {
-      const article = response.items[0];
+    // Check if article found before adding
+    const article = response.items && response.items.length ? response.items[0] : undefined;
 
-      const headerImage = document.createElement("img");
-      headerImage.setAttribute("class", "article-header");
-      headerImage.src = article.teaser_image.value[0].url + "?w=500&h=500";
+    if (!article) {
+      app.innerHTML = notFound;
+      return
+    };
 
-      const title = document.createElement("h2");
-      title.setAttribute("class", "article-title");
-      title.innerText = article.title.value;
+    const headerImage = document.createElement("img");
+    headerImage.setAttribute("class", "article-header");
+    headerImage.src = article.teaser_image.value[0].url + "?w=500&h=500";
 
-      const body = document.createElement("div");
-      body.setAttribute("class", "article-description");
-      body.innerHTML = article.body_copy.resolveHtml();
+    const title = document.createElement("h2");
+    title.setAttribute("class", "article-title");
+    title.innerText = article.title.value;
 
-      articleContainer.appendChild(headerImage);
-      articleContainer.appendChild(title);
-      articleContainer.appendChild(body);
-    }
+    const body = document.createElement("div");
+    body.setAttribute("class", "article-description");
+    body.innerHTML = article.body_copy.resolveHtml();
+
+    articleContainer.appendChild(headerImage);
+    articleContainer.appendChild(title);
+    articleContainer.appendChild(body);
+    return
   })
   .catch(err => {
-    app.innerHTML = notFound;
-    console.log("error: " + err);
+    console.error(err);
+    app.innerHTML = unknownError;
   });
