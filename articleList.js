@@ -24,7 +24,7 @@ deliveryClient
 
       let teaser = document.createElement("img");
       teaser.setAttribute("class", "article-teaser");
-      teaser.src = item.teaser_image.value[0].url + "?w=500&h=500";
+      teaser.src = item.teaser_image.value && item.teaser_image.value.length ? item.teaser_image.value[0].url + "?w=500&h=500" : undefined;
 
       let title = document.createElement("h2");
       title.setAttribute("class", "article-title");
