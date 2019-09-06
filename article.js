@@ -14,7 +14,7 @@ const articleContainer = document.createElement("div");
 articleContainer.setAttribute("class", "article");
 app.appendChild(articleContainer);
 
-let articleSlug = location.hash.slice(1);
+const articleSlug = location.hash.slice(1);
 
 const Kc = window["kenticoCloudDelivery"];
 
@@ -65,17 +65,17 @@ deliveryClient
   .toPromise()
   .then(response => {
     if (response.items && response.items.length) {
-      let article = response.items[0];
+      const article = response.items[0];
 
-      let headerImage = document.createElement("img");
+      const headerImage = document.createElement("img");
       headerImage.setAttribute("class", "article-header");
       headerImage.src = article.teaser_image.value[0].url + "?w=500&h=500";
 
-      let title = document.createElement("h2");
+      const title = document.createElement("h2");
       title.setAttribute("class", "article-title");
       title.innerText = article.title.value;
 
-      let body = document.createElement("div");
+      const body = document.createElement("div");
       body.setAttribute("class", "article-description");
       body.innerHTML = article.body_copy.resolveHtml();
 

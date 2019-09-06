@@ -16,21 +16,21 @@ deliveryClient
   .toPromise()
   .then(response => {
     response.items.forEach(item => {
-      let card = document.createElement("div");
+      const card = document.createElement("div");
       card.setAttribute("class", "card");
 
-      let link = document.createElement("a");
+      const link = document.createElement("a");
       link.href = "./article.html#" + item.url_pattern.value;
 
-      let teaser = document.createElement("img");
+      const teaser = document.createElement("img");
       teaser.setAttribute("class", "article-teaser");
       teaser.src = item.teaser_image.value && item.teaser_image.value.length ? item.teaser_image.value[0].url + "?w=500&h=500" : undefined;
 
-      let title = document.createElement("h2");
+      const title = document.createElement("h2");
       title.setAttribute("class", "article-title");
       title.innerText = item.title.value;
 
-      let description = document.createElement("div");
+      const description = document.createElement("div");
       description.setAttribute("class", "article-description");
       description.innerHTML = item.summary.value;
 
