@@ -1,19 +1,19 @@
+// Define main container
+const app = document.getElementById("app");
+
+// Function for creating and appending elements
+const addToElementbyId = (elementType, id, parent) => {
+  const element = document.createElement(elementType);
+  element.setAttribute("id", id);
+  parent.appendChild(element);
+  return element;
+};
+
 // Set up Kentico Cloud delivery
 const Kc = window["kenticoCloudDelivery"];
 const deliveryClient = new Kc.DeliveryClient({
   projectId: "975bf280-fd91-488c-994c-2f04416e5ee3"
 });
-
-// Define main container
-const app = document.getElementById("app");
-
-// Function for creating and appending elements
-const addToElementbyId = (elementType, attributeValue, parent) => {
-  const element = document.createElement(elementType);
-  element.setAttribute("id", attributeValue);
-  parent.appendChild(element);
-  return element;
-};
 
 // Function for adding elements to DOM with specific attributes
 const createElement = (elementType, classToAdd, attribute, attributeValue) => {
