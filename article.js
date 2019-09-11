@@ -2,46 +2,29 @@
 const renderHash = () => {
   window.history.go();
 };
-
 window.addEventListener("hashchange", renderHash, false);
 
-// Error messages
-const notFound = "<p>That article could not be found.</p>";
-const unknownError = "<p>An error occured 😞. Check the console for more details.</p>";
 
-// Create article container
-const app = document.getElementById("app");
-const articleContainer = document.createElement("div");
-articleContainer.setAttribute("class", "article");
-app.appendChild(articleContainer);
-
+// Define which article is being retrieved
 const articleSlug = location.hash.slice(1);
 
-const Kc = window["kenticoCloudDelivery"];
 
-const deliveryClient = new Kc.DeliveryClient({
-  projectId: "975bf280-fd91-488c-994c-2f04416e5ee3"
-});
+// Create article container
+const articleContainer = addToElementbyId ("div","article",app);
 
+
+// Call for article info
 deliveryClient
   .items()
   .type("article")
   .equalsFilter("elements.url_pattern", articleSlug)
   .queryConfig({
     urlSlugResolver: (link, context) => {
-      // Link to article hash
-      if (link.type === "article") {
-        return {
-          url: `article.html#${link.urlSlug}`
-        };
-      }
-      // Handle coffee links
-      if (link.type === "coffee") {
-        return {
-          url: `coffee.html#${link.urlSlug}`
-        };
-      }
-      return { url: "unsupported-link" };
+      // Set link based on type
+      urlLocation = link.type === "article" ? `article.html#${link.urlSlug}`:
+      link.type === "coffee" ? `coffee.html#${link.urlSlug}`:
+      "unsupported-link";
+      return { url: urlLocation };
     },
     richTextResolver: (item, context) => {
       // Resolved hosted videos
@@ -68,29 +51,21 @@ deliveryClient
     // Check if article found before adding
     const article = response.items && response.items.length ? response.items[0] : undefined;
 
+    // 404 message if not found
     if (!article) {
       app.innerHTML = notFound;
       return
     };
 
-    const headerImage = document.createElement("img");
-    headerImage.setAttribute("class", "article-header");
-    headerImage.src = article.teaser_image.value[0].url + "?w=500&h=500";
+    // Create nodes
+    const headerImage = createElement("img", "article-header", "src", article.teaser_image.value[0].url + "?w=500&h=500");
+    const title = createElement("h2", "article-title", "innerText", article.title.value);
+    const body = createElement("div", "article-description", "innerHTML", article.body_copy.resolveHtml());
 
-    const title = document.createElement("h2");
-    title.setAttribute("class", "article-title");
-    title.innerText = article.title.value;
-
-    const body = document.createElement("div");
-    body.setAttribute("class", "article-description");
-    body.innerHTML = article.body_copy.resolveHtml();
-
-    articleContainer.appendChild(headerImage);
-    articleContainer.appendChild(title);
-    articleContainer.appendChild(body);
+    // Add nodes to DOM
+    articleContainer.append(headerImage,title,body);
     return
   })
   .catch(err => {
-    console.error(err);
-    app.innerHTML = unknownError;
+    reportErrors(err);
   });
