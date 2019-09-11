@@ -4,14 +4,11 @@ const renderHash = () => {
 };
 window.addEventListener("hashchange", renderHash, false);
 
-
 // Define which article is being retrieved
 const articleSlug = location.hash.slice(1);
 
-
 // Create article container
-const articleContainer = addToElementbyId ("div","article",app);
-
+const articleContainer = addToElementbyId("div", "article", app);
 
 // Call for article info
 deliveryClient
@@ -21,9 +18,12 @@ deliveryClient
   .queryConfig({
     urlSlugResolver: (link, context) => {
       // Set link based on type
-      urlLocation = link.type === "article" ? `article.html#${link.urlSlug}`:
-      link.type === "coffee" ? `coffee.html#${link.urlSlug}`:
-      "unsupported-link";
+      urlLocation =
+        link.type === "article"
+          ? `article.html#${link.urlSlug}`
+          : link.type === "coffee"
+          ? `coffee.html#${link.urlSlug}`
+          : "unsupported-link";
       return { url: urlLocation };
     },
     richTextResolver: (item, context) => {
@@ -49,22 +49,38 @@ deliveryClient
   .toPromise()
   .then(response => {
     // Check if article found before adding
-    const article = response.items && response.items.length ? response.items[0] : undefined;
+    const article =
+      response.items && response.items.length ? response.items[0] : undefined;
 
     // 404 message if not found
     if (!article) {
       app.innerHTML = notFound;
-      return
-    };
+      return;
+    }
 
     // Create nodes
-    const headerImage = createElement("img", "article-header", "src", article.teaser_image.value[0].url + "?w=500&h=500");
-    const title = createElement("h2", "article-title", "innerText", article.title.value);
-    const body = createElement("div", "article-description", "innerHTML", article.body_copy.resolveHtml());
+    const headerImage = createElement(
+      "img",
+      "article-header",
+      "src",
+      article.teaser_image.value[0].url + "?w=500&h=500"
+    );
+    const title = createElement(
+      "h2",
+      "article-title",
+      "innerText",
+      article.title.value
+    );
+    const body = createElement(
+      "div",
+      "article-description",
+      "innerHTML",
+      article.body_copy.resolveHtml()
+    );
 
     // Add nodes to DOM
-    articleContainer.append(headerImage,title,body);
-    return
+    articleContainer.append(headerImage, title, body);
+    return;
   })
   .catch(err => {
     reportErrors(err);
