@@ -34,6 +34,38 @@ const createElement = (elementType, classToAdd, attribute, attributeValue) => {
   return element;
 };
 
+// Set link based on type
+const resolveUrl = link => {
+  urlLocation =
+    link.type === "article"
+      ? `article.html#${link.urlSlug}`
+      : link.type === "coffee"
+      ? `coffee.html#${link.urlSlug}`
+      : "unsupported-link";
+  return { url: urlLocation };
+};
+
+// Resolved hosted videos
+const resolveLinkedItems = item => {
+  if (item.system.type === "hosted_video") {
+    const videoID = item.video_id.value;
+
+    // Check if a video host exists
+    const videoHost =
+      item.video_host.value && item.video_host.value.length
+        ? item.video_host.value[0].codename
+        : undefined;
+    if (videoHost) {
+      // Return based on hosting provider
+      return videoHost === "youtube"
+        ? `<iframe src="https://www.youtube.com/embed/${videoID}" width="560" height="315" frameborder="0"></iframe>`
+        : `<iframe src="https://player.vimeo.com/video/${videoID}" width="560" height="315" allowfullscreen frameborder="0"></iframe>`;
+    }
+    return "";
+  }
+  return "";
+};
+
 // Error messages
 const notFound = "<p>That article could not be found.</p>";
 const unknownError =

@@ -17,33 +17,10 @@ deliveryClient
   .equalsFilter("elements.url_pattern", articleSlug)
   .queryConfig({
     urlSlugResolver: (link, context) => {
-      // Set link based on type
-      urlLocation =
-        link.type === "article"
-          ? `article.html#${link.urlSlug}`
-          : link.type === "coffee"
-          ? `coffee.html#${link.urlSlug}`
-          : "unsupported-link";
-      return { url: urlLocation };
+      return resolveUrl(link);
     },
     richTextResolver: (item, context) => {
-      // Resolved hosted videos
-      if (item.system.type === "hosted_video") {
-        const videoID = item.video_id.value;
-
-        // Check if a video host exists
-        const videoHost =
-          item.video_host.value && item.video_host.value.length
-            ? item.video_host.value[0]
-            : undefined;
-        if (videoHost) {
-          // Return based on hosting provider
-          return videoHost.codename === "youtube"
-            ? `<iframe src="https://www.youtube.com/embed/${videoID}" width="560" height="315" frameborder="0"></iframe>`
-            : `<iframe src="https://player.vimeo.com/video/${videoID}" width="560" height="315" allowfullscreen frameborder="0"></iframe>`;
-        }
-        return;
-      }
+      return resolveLinkedItems(item);
     }
   })
   .toPromise()
