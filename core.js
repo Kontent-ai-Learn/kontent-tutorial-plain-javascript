@@ -9,9 +9,9 @@ const addToElementbyId = (elementType, id, parent) => {
   return element;
 };
 
-// Set up Kentico Cloud delivery
-const Kc = window["kenticoCloudDelivery"];
-const deliveryClient = new Kc.DeliveryClient({
+// Set up Kontent delivery
+const Kk = window["kontentDelivery"];
+const deliveryClient = new Kk.DeliveryClient({
   projectId: "975bf280-fd91-488c-994c-2f04416e5ee3"
 });
 
