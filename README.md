@@ -11,4 +11,3 @@ To run, download the files and open `index.html`.
 
 To pull content from your own project, change the `projectId` in both `article.js` and `articleList.js` to the ID of your project.
 
-![Analytics](https://kentico-ga-beacon.azurewebsites.net/api/UA-69014260-4/Kentico/plain-javascript-tutorial?pixel)
