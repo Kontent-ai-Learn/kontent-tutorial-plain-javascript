@@ -31,7 +31,7 @@ deliveryClient
 
     // 404 message if not found
     if (!article) {
-      app.innerHTML = '<p>That article could not be found.</p>';;
+      app.innerHTML = '<p>That article could not be found.</p>';
       return;
     }
 
@@ -66,6 +66,7 @@ deliveryClient
       element: richTextElement,
       linkedItems: Kk.linkedItemsHelper.convertLinkedItemsToArray(response.data.linkedItems),
       urlResolver: (linkId, linkText, link) => {
+        // Set link based on type
         const urlLocation =
           link.type === 'article'
             ? `article.html#${link.urlSlug}`
